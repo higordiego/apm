@@ -37,7 +37,7 @@ module.exports = ({ key, env = 'development' }) => {
     initEventsError({ key, env })
     return {
         errorHandler: (err, req, res, next) => {
-            handlerErrorNotTreatment(key, mountedError(req, err))
+            handlerErrorNotTreatment({ key, env }, mountedError(req, err))
             return next()
         },
         requestHandler: (data, {req}, next) => {
