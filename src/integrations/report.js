@@ -14,9 +14,9 @@ const { requestApi } = require('./request')
  * @param stack
  * @returns {Promise<void>}
  */
-exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, body, stack }) => {
+exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method, body, stack, message }) => {
     try {
-        await requestApi({ url: REQUEST_HANDLER_REPORT,  method: METHOD_REPORT,  data: { headers,  path,  body,  stack, key, env } })
+        await requestApi({ url: REQUEST_HANDLER_REPORT,  method: METHOD_REPORT,  data: { headers, path, method, body, message, stack, key, env } })
     } catch (error) {
         return
     }

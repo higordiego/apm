@@ -14,7 +14,8 @@ const mountedError = (req, err) => ({
     path: req.path,
     method: req.method,
     body: JSON.stringify(req.body),
-    stack: err.stack
+    stack: err.stack,
+    message: err.message
 })
 
 /**
