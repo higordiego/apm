@@ -1,6 +1,6 @@
 
-const REQUEST_HANDLER_REPORT = 'https://apm.higordiego.com.br/apm/handler-request'
-const REQUEST_EVENTS_REPORT = 'https://apm.higordiego.com.br/apm/events-throw'
+const REQUEST_HANDLER_REPORT = 'https://foil.higordiego.com.br/apm/handler-request'
+const REQUEST_EVENTS_REPORT = 'https://foil.higordiego.com.br/apm/events-throw'
 const METHOD_REPORT = 'POST'
 
 const { requestApi } = require('./request')
