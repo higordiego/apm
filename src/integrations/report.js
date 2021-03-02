@@ -27,9 +27,9 @@ exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method,
  * @param key
  * @returns {Promise<void>}
  */
-exports.eventsHandlerTreatment = async ({ key, env }, { origin, error }) => {
+exports.eventsHandlerTreatment = async ({ key, env }, { origin, error, message }) => {
     try {
-        await requestApi({ url: REQUEST_EVENTS_REPORT,  method: METHOD_REPORT,  data: { origin, error , key, env } })
+        await requestApi({ url: REQUEST_EVENTS_REPORT,  method: METHOD_REPORT,  data: { origin, error, message, key, env } })
     } catch (error) {
         return
     }
