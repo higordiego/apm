@@ -8,7 +8,7 @@ const { report: { eventsHandlerTreatment } } = require('../integrations')
  * @returns {function(*, *): *}
  */
 const mountedError = (key, env) => (error, origin) =>
-        eventsHandlerTreatment({ key, env }, { origin, message: error.message, stack: error.stack })
+    eventsHandlerTreatment({ key, env }, { origin, message: error.message, stack: error.stack })
 
 /**
  * @function

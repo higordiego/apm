@@ -1,6 +1,5 @@
 
-const REQUEST_HANDLER_REPORT = 'https://foil.higordiego.com.br/apm/handler-request'
-const REQUEST_EVENTS_REPORT = 'https://foil.higordiego.com.br/apm/events-throw'
+const REQUEST_HANDLER_REPORT = 'http://localhost:7000/apm/handler-request'
 const METHOD_REPORT = 'POST'
 
 const { requestApi } = require('./request')
@@ -14,22 +13,13 @@ const { requestApi } = require('./request')
  * @param stack
  * @returns {Promise<void>}
  */
-exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method, body, stack, message }) => {
+exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method, body, stack, message, params, query }) => {
     try {
-        await requestApi({ url: REQUEST_HANDLER_REPORT,  method: METHOD_REPORT,  data: { headers, path, method, body, message, stack, key, env } })
-    } catch (error) {
-        return
-    }
-}
-
-/**
- * @function
- * @param key
- * @returns {Promise<void>}
- */
-exports.eventsHandlerTreatment = async ({ key, env }, { origin, stack, message }) => {
-    try {
-        await requestApi({ url: REQUEST_EVENTS_REPORT,  method: METHOD_REPORT,  data: { origin, stack, message, key, env } })
+        await requestApi({
+            url: REQUEST_HANDLER_REPORT,
+            method: METHOD_REPORT,
+            data: { headers, path, method, body, message, params, query, stack, key, env }
+        })
     } catch (error) {
         return
     }

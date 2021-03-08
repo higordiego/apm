@@ -1,0 +1,7 @@
+
+
+
+
+exports.capture = () => {
+    return mounted()
+}
