@@ -1,7 +1,0 @@
-
-
-
-
-exports.capture = () => {
-    return mounted()
-}
