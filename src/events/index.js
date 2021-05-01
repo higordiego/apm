@@ -1,4 +1,5 @@
-const { report: { eventsHandlerTreatment } } = require('../integrations')
+const { report: { handlerRequestEvents } } = require('../integrations')
+const { mountedEventsError } = require('../helpers/mountedRequest')
 
 
 /**
@@ -7,18 +8,22 @@ const { report: { eventsHandlerTreatment } } = require('../integrations')
  * @param env
  * @returns {function(*, *): *}
  */
-const mountedError = (key, env) => (error, origin) =>
-    eventsHandlerTreatment({ key, env }, { origin, message: error.message, stack: error.stack })
+const mountedError = (key, env) => async (error, origin) => {
+    console.log(error)
+    await handlerRequestEvents({ key, env }, mountedEventsError(error, origin))
+    process.exit(1)
+}
+
 
 /**
  * @function
  * @param key
  * @param env
- * @returns {{eventsTreatment: eventsTreatment}}
+ * @returns {{eventListening(): void}}
  */
 module.exports = ({ key, env }) => ({
-    eventsTreatment: () => {
-        process.on('uncaughtExceptionMonitor', mountedError(key, env));
+    eventListening() {
+        process.on('uncaughtException', mountedError(key, env));
     }
 })
 

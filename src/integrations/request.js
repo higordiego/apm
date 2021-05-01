@@ -8,7 +8,7 @@ const axios = require('axios')
  */
 const request = async (params, attempt, maxium) => {
     try {
-        const { data } = await axios.request(params)
+        const { data } = await axios.request({...params, timeout: 1000 })
         return data
     } catch (e) {
         if (attempt >= maxium) throw e
