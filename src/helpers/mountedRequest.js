@@ -13,6 +13,7 @@ exports.mountedErrorResponse = (req, res, diffTime) => ({
     params: JSON.stringify(req.params),
     body: JSON.stringify(req.body),
     duration: diffTime,
+    statusCode: Number(res.statusCode),
     type: 'handler-error',
     stack: req.stack,
     message: `${res.statusMessage} - ${req.url}`
@@ -24,15 +25,13 @@ exports.mountedErrorResponse = (req, res, diffTime) => ({
  * @param diffTime
  * @returns {{duration, headers: string, path, method: *, query: string, params: string, body: string, type: string}}
  */
-exports.mountedApplicationResponse = (req, diffTime) => ({
+exports.mountedApplicationResponse = (req, res, diffTime) => ({
     headers: JSON.stringify(req.headers),
     path: req.url,
     method: req.method,
     duration: diffTime,
-    query: JSON.stringify(req.query),
-    params: JSON.stringify(req.params),
-    body: JSON.stringify(req.body),
-    type: 'application'
+    statusCode: Number(res.statusCode),
+    type: 'handler'
 })
 
 /**

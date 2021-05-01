@@ -18,12 +18,12 @@ const { requestApi } = require('./request')
  * @param query
  * @returns {Promise<void>}
  */
-exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method, body, stack, message, params, query, type }) => {
+exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method, body, stack, message, params, query, type, statusCode }) => {
     try {
         await requestApi({
             url: REQUEST_HANDLER_REPORT,
             method: METHOD_REPORT,
-            data: { headers, path, method, body, message, params, query, stack, type, key, env }
+            data: { headers, path, method, body, message, params, query, stack, type, statusCode, key, env }
         })
     } catch (error) {
         return
@@ -41,12 +41,12 @@ exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method,
  * @param query
  * @returns {Promise<void>}
  */
-exports.handlerRequestApplication = async ({ key, env }, { headers, path, method, body, params, query, type }) => {
+exports.handlerRequestApplication = async ({ key, env }, { path, method, type, statusCode }) => {
     try {
         await requestApi({
             url: REQUEST_HANDLER_REPORT,
             method: METHOD_REPORT,
-            data: { headers, path, method, body, params, query, type, key, env }
+            data: { path, method, type, statusCode, key, env }
         })
     } catch (error) {
         return
