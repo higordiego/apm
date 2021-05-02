@@ -16,8 +16,9 @@ module.exports = ({ key, env = 'development' }) => {
             res.once('finish', async () => {
                 const diffTime = Math.abs(new Date() - initDate);
                 await handlerRequestApplication({ key, env }, mountedApplicationResponse(req, res, diffTime))
-                if (Number(res.statusCode) >= 500) await handlerErrorNotTreatment({ key, env }, mountedErrorResponse(req, res, diffTime))
-
+                if (Number(res.statusCode) >= 500) {
+                    await handlerErrorNotTreatment({ key, env }, mountedErrorResponse(req, res, diffTime))
+                }
             });
             return next()
         }

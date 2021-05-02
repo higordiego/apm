@@ -18,12 +18,12 @@ const { requestApi } = require('./request')
  * @param query
  * @returns {Promise<void>}
  */
-exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method, body, stack, message, params, query, type, statusCode }) => {
+exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method, body, stack, message, params, query, type, statusCode, duration }) => {
     try {
         await requestApi({
             url: REQUEST_HANDLER_REPORT,
             method: METHOD_REPORT,
-            data: { headers, path, method, body, message, params, query, stack, type, statusCode, key, env }
+            data: { headers, path, method, body, message, params, query, stack, type, statusCode, key, env, duration }
         })
     } catch (error) {
         return
@@ -41,12 +41,12 @@ exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method,
  * @param query
  * @returns {Promise<void>}
  */
-exports.handlerRequestApplication = async ({ key, env }, { path, method, type, statusCode }) => {
+exports.handlerRequestApplication = async ({ key, env }, { path, method, type, statusCode, duration }) => {
     try {
         await requestApi({
             url: REQUEST_HANDLER_REPORT,
             method: METHOD_REPORT,
-            data: { path, method, type, statusCode, key, env }
+            data: { path, method, type, statusCode, key, env, duration }
         })
     } catch (error) {
         return
@@ -62,12 +62,12 @@ exports.handlerRequestApplication = async ({ key, env }, { path, method, type, s
  * @param type
  * @returns {Promise<void>}
  */
-exports.handlerRequestEvents = async ({ key, env }, { origin, message, stack, type }) => {
+exports.handlerRequestEvents = async ({ key, env }, { origin, message, stack, type, duration }) => {
     try {
         await requestApi({
             url: REQUEST_HANDLER_REPORT,
             method: METHOD_REPORT,
-            data: { origin, message, stack, type, key, env }
+            data: { origin, message, stack, type, key, env, duration }
         })
     } catch (error) {
         return

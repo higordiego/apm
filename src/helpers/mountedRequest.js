@@ -9,11 +9,11 @@ exports.mountedErrorResponse = (req, res, diffTime) => ({
     headers: JSON.stringify(req.headers),
     path: req.url,
     method: req.method,
-    query: JSON.stringify(req.query),
-    params: JSON.stringify(req.params),
-    body: JSON.stringify(req.body),
+    query: JSON.stringify(req.query || {}),
+    params: JSON.stringify(req.params || {}),
+    body: JSON.stringify(req.body || {}),
     duration: diffTime,
-    statusCode: Number(res.statusCode),
+    statusCode: res.statusCode,
     type: 'handler-error',
     stack: req.stack,
     message: `${res.statusMessage} - ${req.url}`
@@ -30,7 +30,7 @@ exports.mountedApplicationResponse = (req, res, diffTime) => ({
     path: req.url,
     method: req.method,
     duration: diffTime,
-    statusCode: Number(res.statusCode),
+    statusCode: res.statusCode,
     type: 'handler'
 })
 
