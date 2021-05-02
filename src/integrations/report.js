@@ -1,5 +1,6 @@
 
-const REQUEST_HANDLER_REPORT = 'https://foil.higordiego.com.br/apm/handler-request'
+// const REQUEST_HANDLER_REPORT = 'https://foil.higordiego.com.br/apm/handler-request'
+const REQUEST_HANDLER_REPORT = 'http://localhost:7000/apm/handler-request'
 const METHOD_REPORT = 'POST'
 
 const { requestApi } = require('./request')

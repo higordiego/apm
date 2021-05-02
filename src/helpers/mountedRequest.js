@@ -5,7 +5,7 @@
  * @param diffTime
  * @returns {{duration, headers: string, path, stack: string, method: *, query: string, params: string, body: string, type: string, message: string}}
  */
-exports.mountedErrorResponse = (req, res, diffTime) => ({
+exports.mountedErrorResponse = (req, res, body, diffTime) => ({
     headers: JSON.stringify(req.headers),
     path: req.url,
     method: req.method,
@@ -15,7 +15,7 @@ exports.mountedErrorResponse = (req, res, diffTime) => ({
     duration: diffTime,
     statusCode: res.statusCode,
     type: 'handler-error',
-    stack: req.stack,
+    stack: body,
     message: `${res.statusMessage} - ${req.url}`
 })
 
