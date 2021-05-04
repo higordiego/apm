@@ -14,16 +14,16 @@ const logResponseBody = ({ key, env }) => async (req, res, next) => {
         oldWrite.apply(res, arguments);
     };
 
-    res.end = async function (chunk) {
+    res.end = function (chunk) {
         if (chunk) chunks.push(new Buffer.from(chunk));
 
         const responseBody = Buffer.concat(chunks).toString('utf8');
 
         const diffTime = Math.abs(new Date() - initDate);
-        await handlerRequestApplication({ key, env }, mountedApplicationResponse(req, res, diffTime))
-        if (Number(res.statusCode) >= 500)  await handlerErrorNotTreatment({ key, env }, mountedErrorResponse(req, res, responseBody, diffTime))
+        handlerRequestApplication({ key, env }, mountedApplicationResponse(req, res, diffTime))
+        if (Number(res.statusCode) >= 500)  handlerErrorNotTreatment({ key, env }, mountedErrorResponse(req, res, responseBody, diffTime))
 
-        await oldEnd.apply(res, arguments);
+        oldEnd.apply(res, arguments);
     };
 
     return next();

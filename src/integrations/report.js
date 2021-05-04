@@ -26,6 +26,7 @@ exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method,
             data: { headers, path, method, body, message, params, query, stack, type, statusCode, key, env, duration }
         })
     } catch (error) {
+        console.log('error', error)
         return
     }
 }
