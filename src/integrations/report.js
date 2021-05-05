@@ -2,7 +2,7 @@
 const REQUEST_HANDLER_REPORT = 'https://foil.higordiego.com.br/apm/handler-request'
 const METHOD_REPORT = 'POST'
 
-const { requestApi } = require('./request')
+const { requestApi } = require('../helpers/request')
 
 /**
  * @function
@@ -26,7 +26,6 @@ exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method,
             data: { headers, path, method, body, message, params, query, stack, type, statusCode, key, env, duration }
         })
     } catch (error) {
-        console.log('error', error)
         return
     }
 }
