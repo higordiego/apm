@@ -16,7 +16,7 @@ exports.mountedErrorResponse = (req, res, body, diffTime) => ({
     statusCode: res.statusCode,
     type: 'handler-error',
     stack: body,
-    message: `${res.statusMessage} - ${req.url}`
+    message: `StatusCode ${res.statusCode} - ${req.url}`
 })
 
 /**
