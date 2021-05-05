@@ -1,4 +1,4 @@
-const { report: { handlerRequestEvents } } = require('../integrations')
+const { handlerRequestEvents } = require('../integrations/report')
 const { mountedEventsError } = require('../helpers/mountedRequest')
 
 

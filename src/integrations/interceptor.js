@@ -1,4 +1,3 @@
-
 const { handlerErrorNotTreatment, handlerRequestApplication } = require('./report')
 const { mountedErrorResponse, mountedApplicationResponse } = require('../helpers/mountedRequest')
 
