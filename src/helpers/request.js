@@ -21,7 +21,5 @@ const request = async (params, attempt, maxium) => {
  * @param  {Object} data
  * @return {Promise}
  */
-exports.requestApi = (params) => {
-    const maxium = process.env.RETRY_REQUEST || 3
-    return request(params, 0, maxium)
-}
+exports.requestApi = (params) => request(params, 0, 3)
+

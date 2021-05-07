@@ -20,6 +20,7 @@ const { requestApi } = require('../helpers/request')
  */
 exports.handlerErrorNotTreatment = async ({ key, env }, { headers, path, method, body, stack, message, params, query, type, statusCode, duration }) => {
     try {
+        console.log('{ headers, path, method, body, message, params, query, stack, type, statusCode, key, env, duration }', { headers, path, method, body, message, params, query, stack, type, statusCode, key, env, duration })
         await requestApi({
             url: REQUEST_HANDLER_REPORT,
             method: METHOD_REPORT,

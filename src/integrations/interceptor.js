@@ -1,13 +1,17 @@
 const { handlerErrorNotTreatment, handlerRequestApplication } = require('./report')
 const { mountedErrorResponse, mountedApplicationResponse } = require('../helpers/mountedRequest')
+const { getConfig } = require('../config')
 
 /**
  * @function
  * @param key
  * @param env
  * @returns {function(*=, *=, *): *}
+ *
  */
 exports.logResponseBody = ({ key, env }) => async (req, res, next) => {
+    const config = await getConfig({ key, env })
+
     let oldWrite = res.write
     let oldEnd = res.end
 
@@ -25,8 +29,8 @@ exports.logResponseBody = ({ key, env }) => async (req, res, next) => {
         const responseBody = Buffer.concat(chunks).toString('utf8');
 
         const diffTime = Math.abs(new Date() - initDate);
-        handlerRequestApplication({ key, env }, mountedApplicationResponse(req, res, diffTime))
-        if (Number(res.statusCode) >= 500)  handlerErrorNotTreatment({ key, env }, mountedErrorResponse(req, res, responseBody, diffTime))
+        handlerRequestApplication({ key, env }, mountedApplicationResponse(req, res, diffTime, config))
+        if (Number(res.statusCode) >= 500)  handlerErrorNotTreatment({ key, env }, mountedErrorResponse(req, res, responseBody, diffTime, config))
 
         oldEnd.apply(res, arguments);
     };

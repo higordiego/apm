@@ -15,3 +15,4 @@ module.exports = ({ key, env = 'development' }) => {
         logger: ({ log: log({ key, env }) })
     }
 }
+

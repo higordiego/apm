@@ -1,3 +1,8 @@
+const { removeJsonParams } = require('../config')
+
+const parseJsonToString = (value) => JSON.stringify(value)
+
+
 /**
  * @function
  * @param req
@@ -5,17 +10,17 @@
  * @param diffTime
  * @returns {{duration, headers: string, path, stack: string, method: *, query: string, params: string, body: string, type: string, message: string}}
  */
-exports.mountedErrorResponse = (req, res, body, diffTime) => ({
-    headers: JSON.stringify(req.headers),
+exports.mountedErrorResponse = (req, res, body, diffTime, config) => ({
+    headers: parseJsonToString(removeJsonParams(config, req.headers)),
     path: req.url,
     method: req.method,
-    query: JSON.stringify(req.query || {}),
-    params: JSON.stringify(req.params || {}),
-    body: JSON.stringify(req.body || {}),
+    query: parseJsonToString(removeJsonParams(config, req.query || {})),
+    params: parseJsonToString(removeJsonParams(config,req.params || {})),
+    body: parseJsonToString(removeJsonParams(config,req.body || {})),
     duration: diffTime,
     statusCode: res.statusCode,
     type: 'handler-error',
-    stack: body,
+    stack: parseJsonToString(removeJsonParams(config, body, true)),
     message: `StatusCode ${res.statusCode} - ${req.url}`
 })
 
@@ -25,8 +30,8 @@ exports.mountedErrorResponse = (req, res, body, diffTime) => ({
  * @param diffTime
  * @returns {{duration, headers: string, path, method: *, query: string, params: string, body: string, type: string}}
  */
-exports.mountedApplicationResponse = (req, res, diffTime) => ({
-    headers: JSON.stringify(req.headers),
+exports.mountedApplicationResponse = (req, res, diffTime, config) => ({
+    headers: parseJsonToString(removeJsonParams(config, req.headers || {})),
     path: req.url,
     method: req.method,
     duration: diffTime,
