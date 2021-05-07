@@ -52,6 +52,12 @@ const replaceValueRules = (equal) => (key, value) => {
  */
 const getCleanData = (obj, element, fn) => JSON.parse(JSON.stringify(obj, fn(element)))
 
+
+exports.getConfigFile = ({ key, env }) => {
+    this.getConfig({ key, env })
+    return config
+}
+
 /**
  * @function
  * @param obj

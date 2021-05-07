@@ -1,6 +1,7 @@
 const events = require('./events')
 const { logResponseBody } = require('./integrations/interceptor')
 const { log }  = require('./loggers')
+const { getConfig } = require('./config')
 
 
 /**
@@ -10,6 +11,8 @@ const { log }  = require('./loggers')
  */
 module.exports = ({ key, env = 'development' }) => {
     events({ key, env }).eventListening()
+    getConfig({ key, env })
+
     return {
         captureHandler: logResponseBody(  { key, env }),
         logger: ({ log: log({ key, env }) })

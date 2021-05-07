@@ -1,5 +1,7 @@
 const { handlerLog } = require('./report')
 
+const { getConfigFile, removeJsonParams } = require('../config')
+
 /**
  * @function
  * @param type
@@ -43,7 +45,10 @@ const typeTag = (tag) => {
  * @param message
  * @returns {string}
  */
-const parseMessage = (message) => JSON.stringify(message)
+const parseMessage = ({ key, env }, message) => {
+    const config = getConfigFile({ key, env })
+    return removeJsonParams(config, message)
+}
 
 /**
  * @function
@@ -56,7 +61,8 @@ const parseMessage = (message) => JSON.stringify(message)
  */
 const mountedRequest = ({ type, tag, message, key, env, debug }) => {
     if (debug) logDebug({ type, tag, message })
-    return handlerLog({ key, env }, { type, tag, message: parseMessage(message) })
+    const config = getConfigFile({ key, env })
+    if (config !== null) return handlerLog({ key, env }, { type, tag, message: parseMessage({key, env }, message) })
 }
 
 

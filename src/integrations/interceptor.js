@@ -1,6 +1,6 @@
 const { handlerErrorNotTreatment, handlerRequestApplication } = require('./report')
 const { mountedErrorResponse, mountedApplicationResponse } = require('../helpers/mountedRequest')
-const { getConfig } = require('../config')
+const { getConfigFile } = require('../config')
 
 /**
  * @function
@@ -11,7 +11,8 @@ const { getConfig } = require('../config')
  */
 exports.logResponseBody = ({ key, env }) => async (req, res, next) => {
     // todo: not blocked request
-    const config = await getConfig({ key, env })
+
+    const config = getConfigFile({ key, env })
 
     let oldWrite = res.write
     let oldEnd = res.end
