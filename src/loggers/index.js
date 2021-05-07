@@ -47,7 +47,7 @@ const typeTag = (tag) => {
  */
 const parseMessage = ({ key, env }, message) => {
     const config = getConfigFile({ key, env })
-    return removeJsonParams(config, message)
+    return JSON.stringify(removeJsonParams(config, message))
 }
 
 /**
