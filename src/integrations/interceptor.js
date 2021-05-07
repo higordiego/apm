@@ -10,6 +10,7 @@ const { getConfig } = require('../config')
  *
  */
 exports.logResponseBody = ({ key, env }) => async (req, res, next) => {
+    // todo: not blocked request
     const config = await getConfig({ key, env })
 
     let oldWrite = res.write

@@ -22,7 +22,7 @@ let timeStamp = setMinute(3)
  * @returns {Promise<null>}
  */
 exports.getConfig = async ({ key, env }) => {
-    if (config && timeStamp > new Date()) return config
+    if (config && timeStamp < new Date()) return config
     try {
         const { excluded = null } = await requestApi({ url: REQUEST_CONFIG,  method: METHOD_CONFIG, data: { key, env } })
         if (excluded !== null) config = excluded
