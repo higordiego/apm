@@ -62,6 +62,7 @@ const parseMessage = ({ key, env }, message) => {
 const mountedRequest = ({ type, tag, message, key, env, debug }) => {
     if (debug) logDebug({ type, tag, message })
     const config = getConfigFile({ key, env })
+    console.log('config', config)
     if (config !== null) return handlerLog({ key, env }, { type, tag, message: parseMessage({key, env }, message) })
 }
 

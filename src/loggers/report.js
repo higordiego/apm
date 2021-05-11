@@ -6,7 +6,7 @@ const { requestApi } = require('../helpers/request')
 
 exports.handlerLog = async ({ key, env }, {  type, tag, message }) => {
     try {
-        await requestApi({
+        const a = await requestApi({
             url: REQUEST_HANDLER_REPORT,
             method: METHOD_REPORT,
             data: { type, tag, key, env, message }
