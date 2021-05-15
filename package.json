@@ -1,12 +1,16 @@
 {
-  "name": "foil-apm",
+  "name": "@reportfy/apm",
   "version": "1.0.0",
+  "description": "Pacote para utilização de apm do reportfy.com.br",
   "main": "index.js",
   "license": "MIT",
+  "keywords": ["apm", "nodejs", "javascript", "perfomance", "report", "reportfy"],
+  "author": "Reportfy",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "axios": "^0.21.1"
-  }
+  },
+  "homepage": "https://github.com/higordiego/foil-apm"
 }
